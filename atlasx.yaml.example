@@ -1,0 +1,17 @@
+project:
+  name: sample_project
+  description: Fictional demo project for AtlasX Discovery Layer.
+  default_provider: offline
+
+input:
+  papers_dir: papers
+  manifest: source_manifest.yaml
+
+output:
+  outputs_dir: outputs
+
+runtime:
+  preserve_uncertainty: true
+  require_source_trace: true
+  human_review_required: true
+

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/atlasx/mechanism.schema.json",
+  "title": "Mechanism",
+  "type": "object",
+  "required": ["mechanism_id", "label", "source_trace"],
+  "properties": {
+    "mechanism_id": { "type": "string" },
+    "label": { "type": "string" },
+    "system_level": { "type": "string" },
+    "related_entities": { "type": "array", "items": { "type": "string" } },
+    "related_inputs": { "type": "array", "items": { "type": "string" } },
+    "uncertainty": { "type": "string" },
+    "source_trace": { "type": "string" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "human_review_required": { "type": "boolean" }
+  }
+}
+

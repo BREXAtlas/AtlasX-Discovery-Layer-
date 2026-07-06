@@ -1,0 +1,27 @@
+[
+  {
+    "atom_id": "atom_example",
+    "paper_id": "toy_bioelectric_frequency_001",
+    "source_trace": "sample_paper_001.txt; chunk 1",
+    "atom_type": "evidence_claim",
+    "paper_question": "Does a low-intensity alternating electric field at a specific frequency change proliferation in a toy epithelial cell culture?",
+    "field_question": "How do bioelectric variables connect across studies?",
+    "discovery_question": "Which replication controls are needed before stronger claims?",
+    "entity": "toy epithelial cell culture",
+    "input_signal_or_intervention": "low-intensity alternating electric field exposure with frequency exposure",
+    "condition": "72 hour exposure window in a controlled in vitro dish",
+    "mechanism": "membrane voltage and calcium signaling",
+    "outcome": "cell proliferation changed in the reported toy setup",
+    "evidence_statement": "The fictional source links field exposure to proliferation through a possible bioelectric mechanism.",
+    "evidence_type": "in vitro",
+    "evidence_strength": "toy evidence for pipeline demonstration; not a real scientific claim",
+    "boundary_conditions": "fictional toy source",
+    "assumptions": "requires human review",
+    "gap": "waveform, intensity calibration, and independent replication are not reported",
+    "connection_candidates": ["membrane voltage", "calcium signaling", "frequency exposure", "cell proliferation"],
+    "next_step": "repeat with preregistered exposure parameters",
+    "confidence": 0.62,
+    "human_review_required": true
+  }
+]
+

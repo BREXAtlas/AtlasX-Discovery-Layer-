@@ -1,0 +1,35 @@
+project:
+  name: sample_project
+  description: Fictional demo project for AtlasX offline mode.
+sources:
+  - paper_id: toy_bioelectric_frequency_001
+    title: Fictional Study of Frequency Exposure and Cell Proliferation
+    authors:
+      - A. Example
+      - B. Demo
+    year: 2026
+    journal: Fictional Open Methods
+    doi: null
+    source_type: fictional public-domain-style text
+    file: sample_paper_001.txt
+    tags:
+      - bioelectricity
+      - frequency exposure
+      - toy example
+    license_status: fictional demo text
+  - paper_id: toy_voltage_calcium_002
+    title: Fictional Notes on Membrane Voltage and Calcium Signaling
+    authors:
+      - C. Sample
+      - D. Researcher
+    year: 2026
+    journal: Fictional Systems Biology Notes
+    doi: null
+    source_type: fictional public-domain-style text
+    file: sample_paper_002.txt
+    tags:
+      - membrane voltage
+      - calcium signaling
+      - toy example
+    license_status: fictional demo text
+

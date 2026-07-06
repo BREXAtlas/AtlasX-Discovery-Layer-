@@ -1,0 +1,40 @@
+project:
+  name: bioelectricity_test_case
+  description: Citation-only seed metadata for lawful local testing.
+sources:
+  - paper_id: levin_djamgoz_2025_bioelectricity_moving_on
+    title: Bioelectricity, Moving On....
+    authors:
+      - M. Levin
+      - M. B. A. Djamgoz
+    year: 2025
+    journal: Bioelectricity
+    volume: 7
+    issue: 2
+    pages: 113-114
+    doi: 10.1089/bioe.2025.0035
+    publisher: SAGE
+    source_type: citation metadata only
+    full_text_included: false
+    lawful_access_note: Users must supply lawful text, abstract, or notes locally if they want processing.
+  - paper_id: mathews_etal_2025_nci_cancer_bioelectricity_meeting_review
+    title: "Meeting Review: National Cancer Institute Conference on Cancer Bioelectricity September 12, 2024"
+    authors:
+      - J. Mathews
+      - P. Erickson
+      - F. Kuchling
+      - N. Jawanda
+      - L. Pio-Lopez
+      - V. P. Pai
+      - M. Levin
+    year: 2025
+    journal: Bioelectricity
+    volume: 7
+    issue: 1
+    pages: 94-104
+    doi: 10.1089/bioe.2024.0049
+    publisher: SAGE
+    source_type: citation metadata only
+    full_text_included: false
+    lawful_access_note: Users must supply lawful text, abstract, or notes locally if they want processing.
+

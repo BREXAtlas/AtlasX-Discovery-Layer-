@@ -1,0 +1,15 @@
+Fictional demo source. This is not a real paper and contains no copyrighted article text.
+
+Title: Fictional Notes on Membrane Voltage and Calcium Signaling
+Research question: How might membrane voltage, ion channels, and calcium signaling organize migration-like behavior in a toy cell model?
+Entity: toy cell model
+Input: membrane voltage perturbation and ion channel modulation
+Condition: short-duration laboratory observation with no animal or clinical data
+Mechanism: membrane voltage, ion channel activity, and calcium signaling are proposed as related bioelectric signaling processes
+Outcome: cell migration changed in the reported toy setup
+Gap: the fictional note does not report dose response, long-term stability, replication, or causal separation of ion channel and calcium effects
+Next step: compare voltage perturbation, calcium imaging, and ion-channel blocking conditions across replicated toy experiments
+
+Evidence statement: The fictional source is a methods-style note for demonstrating how AtlasX connects mechanisms and variables.
+Boundary note: This toy text is not scientific evidence.
+

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/atlasx/evidence_unit.schema.json",
+  "title": "EvidenceUnit",
+  "type": "object",
+  "required": ["evidence_id", "paper_id", "atom_id", "source_trace"],
+  "properties": {
+    "evidence_id": { "type": "string" },
+    "paper_id": { "type": "string" },
+    "atom_id": { "type": "string" },
+    "source_trace": { "type": "string" },
+    "statement": { "type": "string" },
+    "evidence_type": { "type": "string" },
+    "strength": { "type": "string" },
+    "limitations": { "type": "array", "items": { "type": "string" } },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "human_review_required": { "type": "boolean" }
+  }
+}
+

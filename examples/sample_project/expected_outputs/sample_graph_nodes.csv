@@ -1,0 +1,4 @@
+node_id,node_type,label,paper_id,source_trace,confidence,properties
+paper_toy_bioelectric_frequency_001,Paper,Fictional Study of Frequency Exposure and Cell Proliferation,toy_bioelectric_frequency_001,sample_paper_001.txt,0.9,{}
+concept_membrane_voltage,Concept,membrane voltage,,sample_paper_001.txt; chunk 1,0.6,{}
+

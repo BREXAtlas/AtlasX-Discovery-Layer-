@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/atlasx/knowledge_atom.schema.json",
+  "title": "KnowledgeAtom",
+  "type": "object",
+  "required": ["atom_id", "paper_id", "source_trace"],
+  "properties": {
+    "atom_id": { "type": "string" },
+    "paper_id": { "type": "string" },
+    "source_trace": { "type": "string" },
+    "atom_type": { "type": "string" },
+    "paper_question": { "type": "string" },
+    "field_question": { "type": "string" },
+    "discovery_question": { "type": "string" },
+    "entity": { "type": "string" },
+    "input_signal_or_intervention": { "type": "string" },
+    "condition": { "type": "string" },
+    "mechanism": { "type": "string" },
+    "outcome": { "type": "string" },
+    "evidence_statement": { "type": "string" },
+    "evidence_type": { "type": "string" },
+    "evidence_strength": { "type": "string" },
+    "boundary_conditions": { "type": "string" },
+    "assumptions": { "type": "string" },
+    "gap": { "type": "string" },
+    "connection_candidates": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "next_step": { "type": "string" },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "human_review_required": { "type": "boolean" }
+  }
+}
+

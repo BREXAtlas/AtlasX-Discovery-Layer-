@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/atlasx/agent_run.schema.json",
+  "title": "AgentRunRecord",
+  "type": "object",
+  "required": ["agent_name", "status", "provider", "started_at", "completed_at"],
+  "properties": {
+    "agent_name": { "type": "string" },
+    "paper_id": { "type": ["string", "null"] },
+    "status": { "type": "string" },
+    "provider": { "type": "string" },
+    "model": { "type": ["string", "null"] },
+    "started_at": { "type": "string", "format": "date-time" },
+    "completed_at": { "type": "string", "format": "date-time" },
+    "input_summary": { "type": "string" },
+    "output_summary": { "type": "string" },
+    "warnings": { "type": "array", "items": { "type": "string" } }
+  }
+}
+

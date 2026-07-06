@@ -1,0 +1,14 @@
+.env
+data/input/
+data/output/
+examples/**/outputs/
+*.pdf
+__pycache__/
+.pytest_cache/
+.venv/
+.mypy_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+

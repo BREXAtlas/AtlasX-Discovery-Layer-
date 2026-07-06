@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/atlasx/paper_metadata.schema.json",
+  "title": "PaperMetadata",
+  "type": "object",
+  "required": ["paper_id", "title", "file"],
+  "properties": {
+    "paper_id": { "type": "string" },
+    "title": { "type": "string" },
+    "authors": { "type": "array", "items": { "type": "string" } },
+    "year": { "type": ["integer", "null"] },
+    "journal": { "type": "string" },
+    "doi": { "type": ["string", "null"] },
+    "source_type": { "type": "string" },
+    "file": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "abstract": { "type": ["string", "null"] },
+    "notes": { "type": ["string", "null"] },
+    "license_status": { "type": "string" }
+  }
+}
+

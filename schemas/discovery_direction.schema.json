@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/atlasx/discovery_direction.schema.json",
+  "title": "DiscoveryDirection",
+  "type": "object",
+  "required": ["direction_id", "paper_id", "atom_id", "source_trace"],
+  "properties": {
+    "direction_id": { "type": "string" },
+    "paper_id": { "type": "string" },
+    "atom_id": { "type": "string" },
+    "candidate_review_topic": { "type": "string" },
+    "candidate_special_issue_topic": { "type": "string" },
+    "call_for_papers_angle": { "type": "string" },
+    "replication_study": { "type": "string" },
+    "dataset_needed": { "type": "string" },
+    "do_not_overclaim": { "type": "string" },
+    "source_trace": { "type": "string" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "human_review_required": { "type": "boolean" }
+  }
+}
+
