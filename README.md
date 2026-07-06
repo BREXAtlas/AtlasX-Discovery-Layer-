@@ -67,7 +67,7 @@ flowchart TD
 ## Installation
 
 ```bash
-git clone https://github.com/Transform Ontology Systems/atlasx-discovery-layer.git
+git clone https://github.com/BREXAtlas/AtlasX-Discovery-Layer-.git
 cd atlasx-discovery-layer
 python -m venv .venv
 source .venv/bin/activate
@@ -77,7 +77,7 @@ pip install -e ".[dev,pdf]"
 On Windows PowerShell:
 
 ```powershell
-git clone https://github.com/Transform Ontology Systems/atlasx-discovery-layer.git
+git clone https://github.com/BREXAtlas/AtlasX-Discovery-Layer-.git
 cd atlasx-discovery-layer
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
