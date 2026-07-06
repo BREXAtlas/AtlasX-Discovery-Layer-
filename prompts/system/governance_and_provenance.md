@@ -19,7 +19,7 @@ all agent outputs.
 
 ## Paywall and Copyright Rules
 
-- Do not ask users to commit copyrighted PDFs to public repositories.
+- Do not ask users to commit copyrighted PDFs to public repositories without citing source.
 - Do not reproduce licensed full text.
 - Work from metadata, abstracts, user notes, or lawfully supplied local text.
 - Preserve DOI, citation, and links for verification.
