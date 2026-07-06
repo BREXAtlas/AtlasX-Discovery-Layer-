@@ -16,6 +16,7 @@ class ProjectConfig(BaseModel):
     project_dir: Path
     name: str
     papers_dir: Path
+    sources_dir: Path
     manifest_path: Path
     outputs_dir: Path
     preserve_uncertainty: bool = True
@@ -39,7 +40,9 @@ def load_project_config(project_dir: Path) -> ProjectConfig:
     output_section = raw.get("output", {})
     runtime_section = raw.get("runtime", {})
 
-    papers_dir = project_dir / input_section.get("papers_dir", "papers")
+    source_dir_name = input_section.get("sources_dir") or input_section.get("papers_dir") or "papers"
+    papers_dir = project_dir / input_section.get("papers_dir", source_dir_name)
+    sources_dir = project_dir / source_dir_name
     manifest_path = project_dir / input_section.get("manifest", "source_manifest.yaml")
     outputs_dir = project_dir / output_section.get("outputs_dir", "outputs")
 
@@ -47,6 +50,7 @@ def load_project_config(project_dir: Path) -> ProjectConfig:
         project_dir=project_dir,
         name=project_section.get("name", project_dir.name),
         papers_dir=papers_dir,
+        sources_dir=sources_dir,
         manifest_path=manifest_path,
         outputs_dir=outputs_dir,
         preserve_uncertainty=runtime_section.get("preserve_uncertainty", True),
@@ -54,4 +58,3 @@ def load_project_config(project_dir: Path) -> ProjectConfig:
         human_review_required=runtime_section.get("human_review_required", True),
         raw=raw,
     )
-

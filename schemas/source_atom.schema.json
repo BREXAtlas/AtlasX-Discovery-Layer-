@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/atlasx/source_atom.schema.json",
+  "title": "SourceAtom",
+  "type": "object",
+  "required": ["atom_id", "source_id", "source_trace"],
+  "properties": {
+    "atom_id": { "type": "string" },
+    "source_id": { "type": "string" },
+    "source_trace": { "type": "string" },
+    "route": { "type": "string" },
+    "source_type": { "type": "string" },
+    "atom_type": { "type": "string" },
+    "main_topic": { "type": "string" },
+    "question_answered": { "type": "string" },
+    "core_claim": { "type": "string" },
+    "supporting_points": { "type": "array", "items": { "type": "string" } },
+    "evidence_or_examples": { "type": "array", "items": { "type": "string" } },
+    "key_terms": { "type": "array", "items": { "type": "string" } },
+    "named_entities": { "type": "array", "items": { "type": "string" } },
+    "timeline_or_sequence": { "type": "array", "items": { "type": "string" } },
+    "method_or_process": { "type": "string" },
+    "assumptions": { "type": "string" },
+    "limitations": { "type": "string" },
+    "contradictions": { "type": "array", "items": { "type": "string" } },
+    "connections": { "type": "array", "items": { "type": "string" } },
+    "open_questions": { "type": "array", "items": { "type": "string" } },
+    "action_items": { "type": "array", "items": { "type": "string" } },
+    "study_notes": { "type": "array", "items": { "type": "string" } },
+    "user_takeaway": { "type": "string" },
+    "summary": { "type": "string" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "human_review_required": { "type": "boolean" }
+  }
+}
+

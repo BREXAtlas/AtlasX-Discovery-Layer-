@@ -6,10 +6,11 @@ from pathlib import Path
 
 from atlasx.config import ProjectConfig
 from atlasx.io.manifest_loader import load_source_manifest
-from atlasx.io.pdf_loader import load_pdf_text
+from atlasx.io.pdf_loader import load_pdf_pages, load_pdf_text
 from atlasx.io.text_loader import load_text_file
 from atlasx.models.paper import PaperDocument, PaperMetadata, PaperTextChunk
-from atlasx.utils.hashing import slugify, stable_id
+from atlasx.models.source import SourceDocument, SourceMetadata, SourceTextChunk
+from atlasx.utils.hashing import slugify
 
 SUPPORTED_EXTENSIONS = {".txt", ".md", ".pdf"}
 
@@ -21,14 +22,58 @@ def load_project_documents(config: ProjectConfig) -> list[PaperDocument]:
     metadata_records = manifest_records or _infer_metadata_from_papers(config.papers_dir)
     documents: list[PaperDocument] = []
     for metadata in metadata_records:
-        path = _resolve_source_path(config.project_dir, config.papers_dir, metadata.file_path)
+        path = _resolve_source_path(
+            config.project_dir,
+            config.papers_dir,
+            metadata.file_path,
+            fallback_dir=config.sources_dir,
+        )
         if not path.exists():
             raise FileNotFoundError(
                 f"Source file for {metadata.paper_id!r} does not exist: {path}"
             )
-        text = _load_source_text(path)
-        chunks = chunk_text(metadata.paper_id, text, source_name=path.name)
+        text, chunks = _load_paper_text_and_chunks(metadata.paper_id, path)
         documents.append(PaperDocument(metadata=metadata, text=text, chunks=chunks))
+    return documents
+
+
+def load_project_source_documents(config: ProjectConfig) -> list[SourceDocument]:
+    """Load project files as generic source documents."""
+
+    paper_documents = load_project_documents(config)
+    documents: list[SourceDocument] = []
+    for document in paper_documents:
+        metadata = document.metadata
+        source_metadata = SourceMetadata(
+            source_id=metadata.paper_id,
+            title=metadata.title,
+            authors=metadata.authors,
+            year=metadata.year,
+            source_type=metadata.source_type,
+            file=metadata.file,
+            tags=metadata.tags,
+            abstract=metadata.abstract,
+            notes=metadata.notes,
+            license_status=metadata.license_status,
+            doi=metadata.doi,
+            journal=metadata.journal,
+            url=metadata.url,
+            route_hint=metadata.route_hint,
+        )
+        chunks = [
+            SourceTextChunk(
+                source_id=chunk.paper_id,
+                chunk_id=chunk.chunk_id.replace(chunk.paper_id, source_metadata.source_id, 1),
+                text=chunk.text,
+                source_trace=chunk.source_trace,
+                section=chunk.section,
+                page=chunk.page,
+            )
+            for chunk in document.chunks
+        ]
+        documents.append(
+            SourceDocument(metadata=source_metadata, text=document.text, chunks=chunks)
+        )
     return documents
 
 
@@ -68,6 +113,27 @@ def chunk_text(
     return chunks
 
 
+def chunk_source_text(
+    source_id: str,
+    text: str,
+    source_name: str,
+    max_chars: int = 3500,
+) -> list[SourceTextChunk]:
+    """Chunk general source text while preserving source traces."""
+
+    return [
+        SourceTextChunk(
+            source_id=chunk.paper_id,
+            chunk_id=chunk.chunk_id.replace(chunk.paper_id, source_id, 1),
+            text=chunk.text,
+            source_trace=chunk.source_trace,
+            section=chunk.section,
+            page=chunk.page,
+        )
+        for chunk in chunk_text(source_id, text, source_name, max_chars=max_chars)
+    ]
+
+
 def _infer_metadata_from_papers(papers_dir: Path) -> list[PaperMetadata]:
     if not papers_dir.exists():
         raise FileNotFoundError(f"Papers directory does not exist: {papers_dir}")
@@ -90,13 +156,21 @@ def _infer_metadata_from_papers(papers_dir: Path) -> list[PaperMetadata]:
     return records
 
 
-def _resolve_source_path(project_dir: Path, papers_dir: Path, file_path: Path) -> Path:
+def _resolve_source_path(
+    project_dir: Path,
+    papers_dir: Path,
+    file_path: Path,
+    fallback_dir: Path | None = None,
+) -> Path:
     if file_path.is_absolute():
         return file_path
     direct = project_dir / file_path
     if direct.exists():
         return direct
-    return papers_dir / file_path
+    paper_path = papers_dir / file_path
+    if paper_path.exists() or fallback_dir is None:
+        return paper_path
+    return fallback_dir / file_path
 
 
 def _load_source_text(path: Path) -> str:
@@ -106,6 +180,30 @@ def _load_source_text(path: Path) -> str:
     if extension == ".pdf":
         return load_pdf_text(path)
     raise ValueError(f"Unsupported source file extension for {path}")
+
+
+def _load_paper_text_and_chunks(
+    paper_id: str,
+    path: Path,
+) -> tuple[str, list[PaperTextChunk]]:
+    extension = path.suffix.lower()
+    if extension == ".pdf":
+        pages = load_pdf_pages(path)
+        text = "\n\n".join(f"[page {page_number}]\n{page_text}" for page_number, page_text in pages)
+        chunks = [
+            PaperTextChunk(
+                paper_id=paper_id,
+                chunk_id=f"{paper_id}_page_{page_number:03d}",
+                text=page_text or "not reported",
+                source_trace=f"{path.name}; page {page_number}",
+                section="unknown",
+                page=page_number,
+            )
+            for page_number, page_text in pages
+        ]
+        return text, chunks
+    text = _load_source_text(path)
+    return text, chunk_text(paper_id, text, source_name=path.name)
 
 
 def create_minimal_project(project_dir: Path) -> None:

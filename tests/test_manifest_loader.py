@@ -14,3 +14,17 @@ def test_manifest_loader_reads_sample_project() -> None:
     assert records[0].file == "sample_paper_001.txt"
     assert "bioelectricity" in records[0].tags
 
+
+def test_manifest_loader_accepts_source_id_alias(tmp_path) -> None:
+    manifest = tmp_path / "source_manifest.yaml"
+    manifest.write_text(
+        "sources:\n"
+        "  - source_id: source_001\n"
+        "    title: Example Source\n"
+        "    file: example.txt\n",
+        encoding="utf-8",
+    )
+
+    records = load_source_manifest(manifest)
+
+    assert records[0].paper_id == "source_001"

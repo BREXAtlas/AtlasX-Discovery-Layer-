@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/atlasx/source_route.schema.json",
+  "title": "SourceRouteDecision",
+  "type": "object",
+  "required": ["source_id", "route", "source_kind", "confidence"],
+  "properties": {
+    "source_id": { "type": "string" },
+    "route": {
+      "type": "string",
+      "enum": ["research", "general", "learning", "strategic_brief", "source_collection", "unknown"]
+    },
+    "source_kind": { "type": "string" },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "reasons": { "type": "array", "items": { "type": "string" } },
+    "warnings": { "type": "array", "items": { "type": "string" } },
+    "human_review_required": { "type": "boolean" }
+  }
+}
+

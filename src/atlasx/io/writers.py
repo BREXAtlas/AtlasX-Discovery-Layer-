@@ -21,6 +21,7 @@ def ensure_output_dirs(outputs_dir: Path) -> dict[str, Path]:
         "graph": outputs_dir / "graph",
         "reports": outputs_dir / "reports",
         "audit": outputs_dir / "audit",
+        "notebook": outputs_dir / "notebook",
     }
     for path in paths.values():
         path.mkdir(parents=True, exist_ok=True)
@@ -52,4 +53,3 @@ def write_graph_csv(paths: dict[str, Path], nodes: list[GraphNode], edges: list[
 
 def write_report(paths: dict[str, Path], name: str, content: str) -> None:
     (paths["reports"] / name).write_text(content, encoding="utf-8")
-

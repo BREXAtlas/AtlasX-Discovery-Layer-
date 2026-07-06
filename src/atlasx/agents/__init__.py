@@ -6,6 +6,7 @@ from atlasx.agents.discovery_direction_agent import DiscoveryDirectionAgent
 from atlasx.agents.evidence_appraisal_agent import EvidenceAppraisalAgent
 from atlasx.agents.first_principles_extraction_agent import FirstPrinciplesExtractionAgent
 from atlasx.agents.gap_contradiction_agent import GapContradictionAgent
+from atlasx.agents.general_document_extraction_agent import GeneralDocumentExtractionAgent
 from atlasx.agents.intake_agent import IntakeAgent
 from atlasx.agents.ontology_mapping_agent import OntologyMappingAgent
 from atlasx.agents.source_integrity_agent import SourceIntegrityAgent
@@ -20,6 +21,7 @@ __all__ = [
     "EvidenceAppraisalAgent",
     "FirstPrinciplesExtractionAgent",
     "GapContradictionAgent",
+    "GeneralDocumentExtractionAgent",
     "IntakeAgent",
     "OntologyMappingAgent",
     "SourceIntegrityAgent",
@@ -27,4 +29,3 @@ __all__ = [
     "TextPreparationAgent",
     "VisualizationReportingAgent",
 ]
-

@@ -46,10 +46,17 @@ def run_command(
         str | None,
         typer.Option("--model", help="Model name for openai, local, or anthropic provider."),
     ] = None,
+    route: Annotated[
+        str,
+        typer.Option(
+            "--route",
+            help="Source route: research, general, learning, strategic_brief, source_collection, unknown, or auto.",
+        ),
+    ] = "research",
 ) -> None:
     """Run the full AtlasX pipeline."""
 
-    result = run_pipeline(project=project, provider_name=provider, model=model)
+    result = run_pipeline(project=project, provider_name=provider, model=model, route=route)
     table = Table(title="AtlasX run complete")
     table.add_column("Metric")
     table.add_column("Value")
@@ -86,4 +93,3 @@ def report_command(
 
 if __name__ == "__main__":
     app()
-

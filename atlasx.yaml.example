@@ -7,7 +7,10 @@ project:
   default_provider: offline
 
 input:
+  # `papers_dir` is the legacy/internal folder name and remains supported.
+  # `sources_dir` is the broader notebook alias for future app workspaces.
   papers_dir: papers
+  # sources_dir: sources
   manifest: source_manifest.yaml
 
 output:
@@ -17,4 +20,3 @@ runtime:
   preserve_uncertainty: true
   require_source_trace: true
   human_review_required: true
-

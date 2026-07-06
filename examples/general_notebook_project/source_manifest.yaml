@@ -1,0 +1,16 @@
+project:
+  name: general_notebook_project
+sources:
+  - source_id: general_strategy_note_001
+    title: Local-First Research Notebook Planning Note
+    authors:
+      - AtlasX Demo Team
+    year: 2026
+    source_type: synthetic planning note
+    file: example_general_document.txt
+    tags:
+      - local-first
+      - strategy
+      - notebook
+    route_hint: general
+    license_status: synthetic demo text

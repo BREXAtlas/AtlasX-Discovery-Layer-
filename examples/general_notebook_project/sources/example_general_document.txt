@@ -1,0 +1,13 @@
+FICTIONAL DEMO SOURCE - not a real report and contains no copyrighted text.
+
+Title: Local-First Research Notebook Planning Note
+Main topic: A local-first discovery notebook should help users process sources without uploading private files by default.
+Core claim: Users need source-grounded answers, inspectable extracted atoms, and exportable reports that remain tied to source traces.
+Supporting point: The CLI should remain the engine while a future desktop app reads stable JSON, CSV, and Markdown outputs.
+Supporting point: Local model providers reduce privacy risk for sensitive notes, transcripts, essays, and reports.
+Supporting point: Cloud providers should remain optional and visibly labeled.
+Recommendation: Start with offline mode, then test local LLM mode, then add optional cloud providers only when needed.
+Risk: Users may overtrust generated summaries if human review warnings are hidden.
+Open question: Which notebook panels should be prioritized first for nontechnical research users?
+Takeaway: AtlasX should prepare app-ready outputs while preserving local ownership, provenance, and human review.
+

@@ -22,6 +22,8 @@ class PaperMetadata(BaseModel):
     abstract: str | None = None
     notes: str | None = None
     license_status: str = "user-provided"
+    url: str | None = None
+    route_hint: str | None = None
 
     @field_validator("paper_id", "file")
     @classmethod
@@ -63,4 +65,3 @@ class PaperDocument(BaseModel):
     @property
     def paper_id(self) -> str:
         return self.metadata.paper_id
-

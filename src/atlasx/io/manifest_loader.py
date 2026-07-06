@@ -28,7 +28,11 @@ def _metadata_from_source(source: dict[str, Any], index: int) -> PaperMetadata:
     file_name = source.get("file") or source.get("path")
     if not file_name:
         raise ValueError(f"Manifest source #{index} is missing `file`.")
-    paper_id = source.get("paper_id") or slugify(title, fallback=f"paper_{index:03d}")
+    paper_id = (
+        source.get("paper_id")
+        or source.get("source_id")
+        or slugify(title, fallback=f"paper_{index:03d}")
+    )
     authors = source.get("authors") or []
     if isinstance(authors, str):
         authors = [authors]
@@ -45,5 +49,6 @@ def _metadata_from_source(source: dict[str, Any], index: int) -> PaperMetadata:
         abstract=source.get("abstract"),
         notes=source.get("notes"),
         license_status=source.get("license_status") or "user-provided",
+        url=source.get("url"),
+        route_hint=source.get("route_hint"),
     )
-

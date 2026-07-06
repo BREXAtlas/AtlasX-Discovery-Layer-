@@ -41,6 +41,33 @@ cells. AtlasX aims to ask whether the papers touch the same exposure, membrane
 state, cell line, mechanism, evidence type, unanswered biological question, or
 replication need.
 
+## AtlasX Discovery Notebook
+
+AtlasX Discovery Notebook is the future local-first app layer for AtlasX
+Discovery Layer. The current repository provides the CLI engine that processes
+user-owned sources locally, routes them by source type, extracts knowledge atoms
+or source atoms, and writes app-ready outputs for reports, graphs, evidence
+maps, gaps, contradictions, and future notebook interfaces.
+
+This repository is CLI-first today. The future desktop/mobile app will be a
+local UI wrapper around the CLI, not a required cloud app and not a replacement
+for the engine.
+
+AtlasX Discovery Notebook is designed to be:
+
+- **Open-source:** inspectable, extensible, and source-grounded.
+- **Local-first:** files remain in local workspaces unless a user explicitly
+  chooses a cloud provider.
+- **CLI-first:** `atlasx run` remains the processing trigger.
+- **App-ready:** outputs are stable JSON, CSV, and Markdown files a future UI
+  can read.
+- **Broad-source:** it works with scholarly papers and general documents.
+- **Mode-aware:** Research Mode uses the existing discovery layer; General
+  Notebook Mode uses flexible source atoms.
+
+Cloud providers remain optional. Local models are supported through
+OpenAI-compatible endpoints. Human review is always required.
+
 ## Where AtlasX Fits in the Data Life Cycle
 
 Most research databases stop at storage, indexing, retrieval, and presentation.
@@ -249,6 +276,36 @@ and optionally `.pdf` when the PDF dependency is installed.
 If a field cannot be extracted, AtlasX should write `unknown` or `not reported`
 rather than inventing an answer.
 
+## Using Your Own Sources
+
+`papers/` remains the legacy supported folder name for backward compatibility.
+For broader notebook projects, AtlasX also supports the user-facing concept of
+`sources/` through `input.sources_dir` in `atlasx.yaml`.
+
+Example:
+
+```yaml
+input:
+  sources_dir: sources
+  manifest: source_manifest.yaml
+```
+
+Run the existing research pipeline:
+
+```bash
+atlasx run --project my_project --provider offline
+```
+
+Run notebook routing and General Notebook Mode:
+
+```bash
+atlasx run --project my_project --provider offline --route auto
+```
+
+Supported route values are `research`, `general`, `learning`,
+`strategic_brief`, `source_collection`, `unknown`, and `auto`. The default is
+`research` so the existing CLI behavior remains backward-compatible.
+
 ## Agent Team
 
 AtlasX uses modular agents. Each agent has a reusable prompt in
@@ -294,6 +351,13 @@ AtlasX writes:
 - `outputs/reports/discovery_report.md`
 - `outputs/reports/executive_summary.md`
 - `outputs/audit/agent_runs.jsonl`
+
+Notebook routing also writes app-ready outputs:
+
+- `outputs/notebook/source_routes.json`
+- `outputs/notebook/source_atoms.json`
+- `outputs/notebook/source_index.json`
+- `outputs/notebook/notebook_summary.md`
 
 Researchers and editors can use these outputs to plan review articles, solicit
 future research, identify candidate special issues, compare studies, identify

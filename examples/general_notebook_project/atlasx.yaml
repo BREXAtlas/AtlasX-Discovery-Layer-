@@ -1,0 +1,16 @@
+project:
+  name: general_notebook_project
+  default_provider: offline
+
+input:
+  sources_dir: sources
+  manifest: source_manifest.yaml
+
+output:
+  outputs_dir: outputs
+
+runtime:
+  preserve_uncertainty: true
+  require_source_trace: true
+  human_review_required: true
+

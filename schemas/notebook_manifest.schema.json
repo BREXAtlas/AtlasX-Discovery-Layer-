@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/atlasx/notebook_manifest.schema.json",
+  "title": "NotebookManifest",
+  "type": "object",
+  "required": ["notebook_id", "title", "sources", "outputs", "local_only", "human_review_required"],
+  "properties": {
+    "notebook_id": { "type": "string" },
+    "title": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "sources": { "type": "array", "items": { "type": "object" } },
+    "routes": { "type": "array", "items": { "$ref": "source_route.schema.json" } },
+    "outputs": { "type": "object" },
+    "app_version": { "type": "string" },
+    "atlasx_version": { "type": "string" },
+    "local_only": { "type": "boolean" },
+    "provider": { "type": "string" },
+    "human_review_required": { "type": "boolean" }
+  }
+}
+

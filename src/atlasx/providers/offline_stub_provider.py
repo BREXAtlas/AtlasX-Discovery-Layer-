@@ -26,6 +26,8 @@ class OfflineStubProvider(BaseProvider):
     ) -> dict[str, Any]:
         if schema_name == "knowledge_atoms":
             return {"knowledge_atoms": self._knowledge_atoms(user_payload)}
+        if schema_name == "source_atoms":
+            return {"source_atoms": self._source_atoms(user_payload)}
         if schema_name == "generic_review":
             return {"review": "offline deterministic review", "confidence": 0.5}
         return {"result": "offline deterministic result"}
@@ -82,6 +84,58 @@ class OfflineStubProvider(BaseProvider):
                 "atom_type": "evidence_claim",
                 "evidence_statement": f"The source links {intervention} to {outcome} through {mechanism}.",
             },
+        ]
+
+    def _source_atoms(self, payload: dict[str, Any]) -> list[dict[str, Any]]:
+        source = payload["source"]
+        chunks = payload.get("chunks", [])
+        route = payload.get("route", "general")
+        text = "\n".join(chunk.get("text", "") for chunk in chunks)
+        first_trace = (
+            chunks[0].get("source_trace", "user-provided text chunk")
+            if chunks
+            else "user-provided text chunk"
+        )
+        source_id = source["source_id"]
+        title = source.get("title") or "unknown"
+        main_topic = _label(text, "Main topic") or _label(text, "Title") or title
+        core_claim = (
+            _label(text, "Core claim")
+            or _label(text, "Claim")
+            or _first_sentence(text)
+            or "unknown"
+        )
+        summary = _label(text, "Summary") or core_claim
+        terms = _terms(text)
+        return [
+            {
+                "atom_id": stable_id("source_atom", source_id, route, main_topic, core_claim),
+                "source_id": source_id,
+                "source_trace": first_trace,
+                "route": route,
+                "source_type": source.get("source_type", "unknown"),
+                "atom_type": "source_summary",
+                "main_topic": main_topic,
+                "question_answered": _label(text, "Question") or "unknown",
+                "core_claim": core_claim,
+                "supporting_points": _bullet_like_lines(text)[:5],
+                "evidence_or_examples": _sentences_with(text, ["example", "evidence", "because"])[:5],
+                "key_terms": terms,
+                "named_entities": _named_entities(text),
+                "timeline_or_sequence": _sentences_with(text, ["first", "then", "next", "finally"])[:5],
+                "method_or_process": _label(text, "Process") or "not applicable",
+                "assumptions": _label(text, "Assumptions") or "unknown",
+                "limitations": _label(text, "Limitations") or "unknown",
+                "contradictions": _sentences_with(text, ["however", "contradiction", "conflict"])[:5],
+                "connections": terms[:5] or ["not reported"],
+                "open_questions": _sentences_with(text, ["question", "unclear", "unknown"])[:5],
+                "action_items": _sentences_with(text, ["should", "recommend", "action", "next step"])[:5],
+                "study_notes": [f"Review source trace: {first_trace}", "Human review required."],
+                "user_takeaway": _label(text, "Takeaway") or summary,
+                "summary": summary,
+                "confidence": 0.58,
+                "human_review_required": True,
+            }
         ]
 
 
@@ -171,3 +225,58 @@ def _connection_candidates(text: str) -> list[str]:
             candidates.append(term)
     return candidates or ["mechanism-level comparison"]
 
+
+def _first_sentence(text: str) -> str | None:
+    clean = " ".join(line.strip() for line in text.splitlines() if line.strip())
+    if not clean:
+        return None
+    sentence = re.split(r"(?<=[.!?])\s+", clean)[0].strip()
+    return sentence[:300] if sentence else None
+
+
+def _bullet_like_lines(text: str) -> list[str]:
+    lines: list[str] = []
+    for line in text.splitlines():
+        stripped = line.strip(" -\t")
+        if stripped and (line.lstrip().startswith(("-", "*")) or ":" in line):
+            lines.append(stripped)
+    return lines
+
+
+def _sentences_with(text: str, terms: list[str]) -> list[str]:
+    sentences = re.split(r"(?<=[.!?])\s+", " ".join(text.split()))
+    output: list[str] = []
+    for sentence in sentences:
+        lowered = sentence.lower()
+        if any(term in lowered for term in terms):
+            output.append(sentence[:300])
+    return output
+
+
+def _terms(text: str) -> list[str]:
+    lowered = text.lower()
+    terms = []
+    for term in [
+        "source-grounded answers",
+        "local-first",
+        "policy",
+        "strategy",
+        "learning objectives",
+        "key terms",
+        "timeline",
+        "evidence",
+        "implementation",
+        "risk",
+    ]:
+        if term in lowered:
+            terms.append(term)
+    return terms
+
+
+def _named_entities(text: str) -> list[str]:
+    matches = re.findall(r"\b[A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){0,3}\b", text)
+    seen: list[str] = []
+    for match in matches:
+        if match not in seen and len(match) > 2:
+            seen.append(match)
+    return seen[:10]
