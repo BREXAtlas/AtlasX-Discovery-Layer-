@@ -1,0 +1,16 @@
+FICTIONAL DEMO SOURCE — not a real paper, contains no copyrighted article text.
+
+Title: Fictional Notes on Membrane Voltage, Calcium Signaling, and Cell Behavior
+Research question: Do changes in membrane voltage alter calcium signaling and a related cellular behavior in a toy neuron-like model?
+Field question: What cellular mechanisms convert an electrical state into a behavioral change?
+Discovery question: Is membrane voltage a shared mechanism across field-exposure and voltage-perturbation studies?
+Entity: toy neuron-like cell model
+Input: direct membrane voltage perturbation
+Condition: low intensity condition over a short observation window
+Mechanism: membrane voltage, calcium signaling, and ion channel activity
+Outcome: cell proliferation changed in the reported toy setup
+Gap: independent replication and quantitative calcium measurements are not reported
+Next step: compare with frequency-exposure studies that touch the same membrane-voltage mechanism and identify replication needs
+
+Evidence statement: The fictional source describes a conceptual toy model and explicitly says it is not a clinical or scientific conclusion.
+Boundary note: This toy text exists only to demonstrate the AtlasX Claude workflow. It is fictional.

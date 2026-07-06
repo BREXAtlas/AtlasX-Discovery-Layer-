@@ -1,0 +1,34 @@
+project:
+  name: claude_code_demo
+  description: Fictional demo project for the AtlasX Claude Code workflow.
+sources:
+  - paper_id: fictional_bioelectricity_demo_001
+    title: Fictional Demonstration of Frequency Exposure and Migration in a Toy Cell Model
+    authors:
+      - A. Example
+      - B. Demo
+    year: 2026
+    journal: Fictional Open Methods
+    doi: null
+    source_type: fictional public-domain-style text
+    file: fictional_bioelectricity_demo_001.txt
+    tags:
+      - bioelectricity
+      - frequency exposure
+      - toy example
+    license_status: fictional demo text
+  - paper_id: fictional_bioelectricity_demo_002
+    title: Fictional Notes on Membrane Voltage, Calcium Signaling, and Cell Behavior
+    authors:
+      - C. Sample
+      - D. Researcher
+    year: 2026
+    journal: Fictional Systems Biology Notes
+    doi: null
+    source_type: fictional public-domain-style text
+    file: fictional_bioelectricity_demo_002.txt
+    tags:
+      - membrane voltage
+      - calcium signaling
+      - toy example
+    license_status: fictional demo text

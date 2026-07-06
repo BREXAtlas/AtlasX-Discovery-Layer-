@@ -96,6 +96,78 @@ atlasx report --project examples/sample_project
 
 Outputs are written to `examples/sample_project/outputs/`.
 
+## Claude Code users
+
+Claude Code reads `CLAUDE.md` automatically. This repository ships a full
+Claude-native layer, so you can use it as a codebase, a prompt library, a
+subagent library, and a research workflow template:
+
+- Project instructions in [`CLAUDE.md`](CLAUDE.md) and
+  [`.claude/CLAUDE.md`](.claude/CLAUDE.md)
+- Modular rules in [`.claude/rules/`](.claude/rules/)
+- A Discovery Layer subagent team in [`.claude/agents/`](.claude/agents/)
+- Reusable skills in [`.claude/skills/`](.claude/skills/)
+- Docs for Claude users in [`docs/claude/`](docs/claude/)
+
+Quickstart:
+
+```bash
+git clone https://github.com/BREXAtlas/AtlasX-Discovery-Layer-.git
+cd atlasx-discovery-layer
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+claude
+```
+
+Then, in Claude Code:
+
+```
+Use the atlasx-run-discovery skill to process examples/sample_project in offline
+mode, then summarize the generated outputs.
+```
+
+- **Use offline mode first** — it is deterministic and needs no API key.
+- **Use the Anthropic API provider if desired** — install `".[anthropic]"`, set
+  `ANTHROPIC_API_KEY`, and run
+  `atlasx run --project examples/sample_project --provider anthropic --model $ANTHROPIC_MODEL`
+  (see [docs/claude/anthropic_api_provider.md](docs/claude/anthropic_api_provider.md)).
+- **Invoke the subagent team** — ask the `atlasx-orchestrator` to run the
+  pipeline, or call a specific agent
+  (see [docs/claude/claude_subagent_team.md](docs/claude/claude_subagent_team.md)).
+- **Invoke skills** — ask Claude Code to use a skill by name (e.g.
+  `atlasx-build-knowledge-graph`), or use the slash command if your Claude Code
+  version exposes project skills as slash commands.
+- **Avoid committing copyrighted sources** — process lawful local copies; PDFs,
+  DOCX, EPUB, and generated outputs are gitignored. Run
+  `python scripts/claude/check_public_safety.py` before publishing.
+
+**Human review is required.** AtlasX outputs are research-support artifacts, not
+final scientific claims, medical advice, legal advice, or automated editorial
+decisions.
+
+## Claude-native Discovery Layer workflow
+
+Most research databases stop at storage, indexing, retrieval, and presentation.
+AtlasX adds a post-publication sensemaking layer. In Claude Code, that layer is
+represented as a coordinated team of Claude subagents and skills that follow the
+research data life cycle.
+
+```mermaid
+flowchart TD
+  A[Research Article Creation] --> B[Source Intake]
+  B --> C[Metadata + Text Preparation]
+  C --> D[First-Principles Extraction]
+  D --> E[STEMd Analysis]
+  E --> F[Ontology Mapping]
+  F --> G[Evidence Appraisal]
+  G --> H[Connection Reasoning]
+  H --> I[Gap + Contradiction Detection]
+  I --> J[Discovery Direction Generation]
+  J --> K[Knowledge Graph + Reports + Visualizations]
+  K --> L[Research Strategy, Calls for Papers, Special Issues, Experiments, Reviews]
+```
+
 ## Running Locally With a Local LLM
 
 AtlasX supports OpenAI-compatible local endpoints, including Ollama, LM Studio,

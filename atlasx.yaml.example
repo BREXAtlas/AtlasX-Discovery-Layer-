@@ -1,6 +1,9 @@
 project:
   name: sample_project
   description: Fictional demo project for AtlasX Discovery Layer.
+  # Provider: offline (default), local, openai, or anthropic.
+  # Providers other than offline are configured via environment variables
+  # (see .env.example). Offline needs no key and no network.
   default_provider: offline
 
 input:

@@ -1,0 +1,16 @@
+FICTIONAL DEMO SOURCE — not a real paper, contains no copyrighted article text.
+
+Title: Fictional Demonstration of Frequency Exposure and Migration in a Toy Cell Model
+Research question: Does a low-intensity electric field at a specific frequency change migration in a toy fibroblast-like cell culture?
+Field question: How do external electrical inputs relate to cellular behavior?
+Discovery question: Which mechanism links field exposure to a measurable cellular change?
+Entity: toy fibroblast-like cell culture
+Input: low-intensity alternating electric field exposure with frequency exposure
+Condition: 72 hour exposure window in a controlled in vitro dish
+Mechanism: membrane voltage and ion channel activity may mediate the observed response
+Outcome: cell migration changed in the reported toy setup
+Gap: waveform, intensity calibration, and independent replication are not reported
+Next step: repeat the toy protocol with preregistered frequency, intensity, duration, and waveform controls
+
+Evidence statement: The fictional source describes a small in vitro demonstration and explicitly says the result should not be treated as clinical evidence.
+Boundary note: This toy text exists only to demonstrate the AtlasX Claude workflow. It is fictional.

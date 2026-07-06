@@ -1,8 +1,15 @@
 .env
+.env.*
+!.env.example
+CLAUDE.local.md
+.claude/settings.local.json
 data/input/
 data/output/
 examples/**/outputs/
+outputs/
 *.pdf
+*.docx
+*.epub
 __pycache__/
 .pytest_cache/
 .venv/

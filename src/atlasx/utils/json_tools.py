@@ -38,5 +38,16 @@ def extract_json_payload(text: str) -> Any:
     if stripped.startswith("```"):
         lines = stripped.splitlines()
         stripped = "\n".join(line for line in lines[1:] if line.strip() != "```")
-    return json.loads(stripped)
-
+    try:
+        return json.loads(stripped)
+    except json.JSONDecodeError:
+        decoder = json.JSONDecoder()
+        for index, character in enumerate(stripped):
+            if character not in "{[":
+                continue
+            try:
+                payload, _ = decoder.raw_decode(stripped[index:])
+            except json.JSONDecodeError:
+                continue
+            return payload
+        raise

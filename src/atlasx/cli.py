@@ -40,11 +40,11 @@ def run_command(
     ],
     provider: Annotated[
         str,
-        typer.Option("--provider", help="Provider: offline, local, or openai."),
+        typer.Option("--provider", help="Provider: offline, local, openai, or anthropic."),
     ] = "offline",
     model: Annotated[
         str | None,
-        typer.Option("--model", help="Model name for OpenAI or local provider."),
+        typer.Option("--model", help="Model name for openai, local, or anthropic provider."),
     ] = None,
 ) -> None:
     """Run the full AtlasX pipeline."""
