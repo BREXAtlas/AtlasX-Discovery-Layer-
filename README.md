@@ -67,7 +67,7 @@ flowchart TD
 ## Installation
 
 ```bash
-git clone https://github.com/YOUR-ORG/atlasx-discovery-layer.git
+git clone https://github.com/Transform Ontology Systems/atlasx-discovery-layer.git
 cd atlasx-discovery-layer
 python -m venv .venv
 source .venv/bin/activate
@@ -77,7 +77,7 @@ pip install -e ".[dev,pdf]"
 On Windows PowerShell:
 
 ```powershell
-git clone https://github.com/YOUR-ORG/atlasx-discovery-layer.git
+git clone https://github.com/Transform Ontology Systems/atlasx-discovery-layer.git
 cd atlasx-discovery-layer
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
@@ -236,4 +236,3 @@ multi-agent research sensemaking for papers. Version 0.1.0.
 
 AtlasX can reduce cognitive load, but it cannot replace expert interpretation,
 peer review, source reading, or ethical judgment.
-
