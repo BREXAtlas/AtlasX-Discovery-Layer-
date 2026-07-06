@@ -199,6 +199,40 @@ atlasx run --project examples/sample_project --provider openai --model gpt-4.1-m
 
 Never hard-code secrets or commit `.env`.
 
+## Running With Claude
+
+AtlasX can also run the same agent pipeline through Anthropic Claude using the
+optional Anthropic provider. Offline mode remains the default for demos and
+tests, so Claude support does not change the no-key quickstart.
+
+Install the optional dependency:
+
+```bash
+pip install -e ".[anthropic]"
+```
+
+Set your Anthropic API key and, optionally, a model:
+
+```bash
+cp .env.example .env
+export ANTHROPIC_API_KEY=your_key_here
+export ANTHROPIC_MODEL=claude-opus-4-8
+atlasx run --project examples/sample_project --provider anthropic --model claude-opus-4-8
+```
+
+Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+$env:ANTHROPIC_API_KEY = "your_key_here"
+$env:ANTHROPIC_MODEL = "claude-opus-4-8"
+atlasx run --project examples/sample_project --provider anthropic --model claude-opus-4-8
+```
+
+Claude Code users can also use the project memory, subagents, rules, and skills
+under `CLAUDE.md` and `.claude/`. See `docs/claude/` for the Claude-native
+workflow, and never commit `.env` or API keys.
+
 ## Using Your Own Papers
 
 Create a project folder:
